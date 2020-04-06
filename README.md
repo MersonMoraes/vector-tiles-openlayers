@@ -164,7 +164,7 @@ Ela fica acessível em [http://localhost:4200](http://localhost:4200 "http://loc
 
 ![](images/openlayers-frontend.png)
 
-## 4. Conclusão ##
+## 5. Conclusão ##
 
 Essa forma de se servir dados vetoriais é bastante interessante para o desenvolvimento de aplicações com características de GIS para a Web, pois permite desenvolvimento de interações mais refinadas que os serviços de mapas não permitiam por disponibilizar somente as imagens. Existem diversas ferramentas GIS de mercado que já dão suporte a esse formato de dados. Porém, com o desenho sendo feito no frontend, perde-se a capacidade de fazer um gerenciamento de estilos no servidor, e isso é transferido para a aplicação que consome o dado. E como os estilos são definidos via código, a criação ou mudanças na exibição do mapa acabam sendo feitas com mudanças de código da aplicação no frontend.
 
