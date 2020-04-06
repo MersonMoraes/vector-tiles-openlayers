@@ -1,0 +1,23 @@
+version: "3"
+
+services:
+  db:
+    image: mdillon/postgis:11
+    restart: always
+    environment:
+      - POSTGRES_USER=geoserver
+      - POSTGRES_PASSWORD=geoserver
+    ports:
+      - "5432:5432"
+
+  geoserver:
+    image: heitorcarneiro/geoserver:2.15.2-java11-hotspot
+    restart: always
+    environment:
+      - CATALINA_OPTS="-Djava.awt.headless=true -server -Xms512M -Xmx512M -DGEOSERVER_DATA_DIR=/var/local/geoserver"
+    ports:
+      - "8080:8080"
+    links:
+      - "db:postgis"
+    depends_on:
+      - "db"
