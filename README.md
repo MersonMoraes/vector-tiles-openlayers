@@ -10,7 +10,7 @@ O WMS foi um dos primeiros padrões criados para suportar a criação e difusão
 
 ## 1.2 Web Feature Service (WFS) ##
 
-Como o WMS somente retorna uma imagem com um mapa pronto, e não os dados em sí, a especificação WFS foi criada para atingir este fim de disponibilizar o dado. O WFS é mais um serviço que permite requisições espaciais só que, ao invés de renderizar os dados no servidor, ele somente retorna os dados consultados em algum dos formatos bem conhecidos para trânsito de dados vetoriais [Geography Markup Language](https://www.ogc.org/standards/gml "https://www.ogc.org/standards/gml") (GML), , etc. Permitindo ao cliente manipular os dados da forma que quiser.
+Como o WMS somente retorna uma imagem com um mapa pronto, e não os dados em sí, a especificação WFS foi criada para atingir este fim de disponibilizar o dado. O WFS é mais um serviço que permite requisições espaciais só que, ao invés de renderizar os dados no servidor, ele somente retorna os dados consultados em algum dos formatos bem conhecidos para trânsito de dados vetoriais [Geography Markup Language](https://www.ogc.org/standards/gml "https://www.ogc.org/standards/gml") (GML), [GeoJSON](https://geojson.org "https://geojson.org/"), etc. Permitindo ao cliente manipular os dados da forma que quiser.
 
 Tais padrões permitiram que diversos tipos de aplicações web fossem construídas utilizando-se de dados e mapas. Porém, alguns gargalos ainda existiam nessas duas abordagens. No caso do WMS, a renderização é feita no servidor no momento da request o que faz com que os serviços sejam rapidamente sobrecarregados. E o WFS tem o problema do peso das feições geográficas que ele trafega na rede. Caso o cliente faça uma request muito genérica que retorne muitas entidades, ele vai devolver as feições sem nenhum tipo de simplificação do dado para diminuir o tamanho da resposta.
 
@@ -43,9 +43,9 @@ Para executar os passos deste tutorial, será necessário ter instalado as segui
 
 Este repositório tem a seguinte estrutura (em diretórios):
 
-- docker: docker compose com um container de PostGIS e outro com o Geoserver
-- data: dados em shapefile que serão importados para o PostGIS
-- app: encontra-se a aplicação web com Openlayers que faz acesso aos dados expostos em Vector Tiles
+- [docker](docker "docker"): docker compose com um container de PostGIS e outro com o Geoserver
+- [data](data "data"): dados em shapefile que serão importados para o PostGIS
+- [app](app "app"): encontra-se a aplicação web com Openlayers que faz acesso aos dados expostos em Vector Tiles
 
 ## 4. Rodando Aplicações ##
 
