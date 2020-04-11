@@ -160,7 +160,7 @@ Depois rodamos a aplicação:
 
     npm run start
 
-Ela fica acessível em [http://localhost:4200](http://localhost:4200 "http://localhost:4200"). O mapa é bem simples, possui como pano de fundo uma camada Open Street Maps e o dado de logradouros é desenhado por cima. Ao passar o mouse nas feições, você visualiza o atributo nome dela, demonstrando assim que o que temos ali no front é a geometria e seus atributos recuperados via Vector Tiles. O código que permite essa interação pode ser visualizado em [app/index.js](app/index.js "app/index.js")
+Ela fica acessível em [http://localhost:4200](http://localhost:4200 "http://localhost:4200"). O mapa é bem simples, possui como pano de fundo uma camada Open Street Maps e o dado de logradouros é desenhado por cima. Ao passar o mouse nas feições, você visualiza um highlight da geometria e o atributo "nome" dela, demonstrando assim que o que temos ali no front é a geometria e seus atributos recuperados via Vector Tiles. O código que permite essa interação pode ser visualizado em [app/index.js](app/index.js "app/index.js")
 
 ![](images/openlayers-frontend.png)
 

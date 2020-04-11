@@ -8,6 +8,9 @@ import { VectorTile as VectorTileSource} from 'ol/source';
 import {Stroke, Style} from 'ol/style';
 import {createXYZ} from 'ol/tilegrid';
 import Overlay from 'ol/Overlay';
+import VectorSource from 'ol/source/Vector';
+import VectorLayer from 'ol/layer/Vector';
+import { Feature } from 'ol';
 
 var raster = new TileLayer({
   source: new OSM()
@@ -19,6 +22,21 @@ var degrees2meters = function(lon,lat) {
   y = y * 20037508.34 / 180;
   return [x, y]
 }
+
+var highlightSource = new VectorSource();
+
+var highlightStyle = new Style({
+  stroke: new Stroke({
+    color: 'yellow',
+    width: 10
+  })
+});
+
+var highlightLayer = new VectorLayer({
+  source: highlightSource,
+  style: highlightStyle
+});
+
 
 var styleSimple = new Style({
   stroke: new Stroke({
@@ -33,14 +51,16 @@ var vectorTileLayer = new VectorTile(
     source: new VectorTileSource({
       tilePixelRatio: 1, // oversampling when > 1
       tileGrid: createXYZ({maxZoom: 19}),
-      format: new MVT(),
+      format: new MVT({
+        featureClass: Feature
+      }),
       url: 'http://localhost:8080/geoserver/gwc/service/tms/1.0.0/vector_tiles_workspace:logradouro@EPSG%3A900913@pbf/{z}/{x}/{-y}.pbf'
     })
   }
 );
 
 var map = new Map({
-  layers: [raster, vectorTileLayer],
+  layers: [raster, vectorTileLayer, highlightLayer],
   target: 'map',
   view: new View({
     center: degrees2meters(-46.643033731127005, -23.67397873817854),
@@ -57,13 +77,16 @@ var label = null;
 
 map.on('pointermove', function(e) {
 
-  vectorTileLayer.getFeatures(e.pixel).then(featureList => {
+  highlightSource.clear();
 
-    featureList.forEach(feature => {
-      label = feature.get('lg_nome');
-      info.style.display = label ? '' : 'none';
-      info.innerHTML = label;
-      overlay.setPosition(e.coordinate);
-    });
+  map.forEachFeatureAtPixel(e.pixel, function(feature) {
+    label = feature.get('lg_nome');
+    info.style.display = label ? '' : 'none';
+    info.innerHTML = label;
+    overlay.setPosition(e.coordinate);
+
+    highlightSource.addFeature(new Feature(feature.getGeometry()));
+  }, {
+    hitTolerance: 7
   });
 });
